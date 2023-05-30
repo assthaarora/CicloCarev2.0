@@ -41,11 +41,7 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Order Management</h4>
-<<<<<<< HEAD
                    
-=======
-
->>>>>>> master
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
@@ -54,7 +50,6 @@
                                        S.No.
                                     </th>
                                     <th>
-<<<<<<< HEAD
                                       Order
                                     </th>
                                     <th>
@@ -72,23 +67,12 @@
                                      <th>
                                         Track Order
                                      </th>
-=======
-                                        Medicine Name
-                                    </th>
-                                    <th>
-                                        Medicine quantity
-                                    </th>
-                                    <th>
-                                       Pending Suply Days
-                                    </th>
->>>>>>> master
                                      <th>
                                         Status
                                      </th>
                                 </tr>
                             </thead>
                             <tbody>
-<<<<<<< HEAD
                                 <tr>
                                     <td >
                                        1
@@ -119,27 +103,6 @@
                                         NA
                                     </td>
                                 </tr>
-=======
-                                @foreach ($orders as $key => $order)
-                                    <tr>
-                                        <td>
-                                        {{$key+1}}
-                                        </td>
-                                        <td>
-                                            {{ $order->MedicineDetail->med_name }}
-                                        </td>
-                                        <td>
-                                            {{ $order->MedicineDetail->quantity }}
-                                        </td>
-                                        <td>
-                                            {{-- {{ $order->MedicineDetail->quantity }} --}}
-                                        </td>
-                                        <td>
-                                            {{ $order->OrderStatus->status }}
-                                        </td>
-                                    </tr>
-                                @endforeach
->>>>>>> master
                             </tbody>
                         </table>
                     </div>

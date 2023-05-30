@@ -49,6 +49,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
+<<<<<<< HEAD
     return view('patient/email');
 });
 
@@ -60,6 +61,25 @@ Route::post('/form', [App\Http\Controllers\Patient\IntakePageController::class, 
 Route::get('/users_profile', [App\Http\Controllers\PatientController::class, 'users_profile'])->name('users_profile');
 Route::get('/home', [App\Http\Controllers\Patient\DashboradController::class, 'index'])->name('home');
 Route::get('/patient_dashboard', [App\Http\Controllers\Patient\DashboradController::class, 'index'])->name('patient_dashboard');
+=======
+    return view('welcome');
+})->name('/');
+
+Auth::routes();
+Route::get('/login', function () {return view('auth.login');})->name('login');
+Route::get('/intake/{mId}', [App\Http\Controllers\Patient\EmailIntakeController::class, 'create'])->name('intake');
+Route::post('/intake', [App\Http\Controllers\Patient\EmailIntakeController::class, 'store'])->name('intake.store');
+Route::get('/form/{email}/{mId}', [App\Http\Controllers\Patient\IntakePageController::class, 'index'])->name('form');
+Route::post('/form', [App\Http\Controllers\Patient\IntakePageController::class, 'store'])->name('form.store');
+
+
+Route::get('/patient_dashboard', [App\Http\Controllers\Patient\DashboradController::class, 'index'])->name('patient_dashboard');
+
+
+
+Route::get('/users_profile', [App\Http\Controllers\PatientController::class, 'users_profile'])->name('users_profile');
+Route::get('/home', [App\Http\Controllers\Patient\DashboradController::class, 'index'])->name('home');
+>>>>>>> master
 Route::get('/order_management', [App\Http\Controllers\HomeController::class, 'order_management'])->name('order_management');
 Route::resource('patient_profile', App\Http\Controllers\Patient\PatientProfileController::class);
 Route::post('/patient_profile/updatePassword/{id}', [App\Http\Controllers\Patient\PatientProfileController::class, 'updatePassword'])->name('patient_profile.updatePassword');

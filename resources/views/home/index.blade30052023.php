@@ -38,14 +38,8 @@
      <!-- ======= Sidebar =======  -->
     @include('home.slidebar');
     <main id="main" class="main">
-<<<<<<< HEAD
       <h2 class="secondary-title mt-3">Prescription</h2>
 
-=======
-
-
-<h2 class="secondary-title mt-3">Prescription</h2>
->>>>>>> master
       <section class="section dashboard">
         <div class="row">
           <!-- Left side columns -->
@@ -54,7 +48,6 @@
               <div class="col-12">
                 <div class="card mb-3">
                   <div class="row g-0">
-<<<<<<< HEAD
                     <div class="col-md-4">
                       <img src="assets/img/1.png" class="img-fluid rounded-start" alt="...">
                     </div>
@@ -66,45 +59,10 @@
                         <a class="detail-link mt-3"> Manage Prescription <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2 feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
                       </div>
                     </div>
-=======
-                    <div class="col-12">
-                      <div class="card ">
-                      </div>
-                      <div class="card-body">
-                          <h5 class="card-title">Your Prescriptions</h5>
-                          <table class="table table-borderless datatable">
-                            <thead>
-                              <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Medicine</th>
-                                <th scope="col">Subscription</th>
-                                <th scope="col">Price</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">View</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              @foreach($patientCases as $caseKey=> $cases)
-                              <tr>
-                                <th scope="row">{{$caseKey+1}}</th>
-                                <td>{{$cases->med_name}}</td>
-                                <td>{{$cases->subscription}}</td>
-                                <td>${{$cases->price}}</td>
-                                <td><span class="badge bg-success">{{$cases->name}}</span></td>
-                                <td><a href="{{ route('patient_dashboard') }}" class="btn  btn-warning ">View</a></td>
-                              </tr>
-                              @endforeach
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    </div
->>>>>>> master
                   </div>
                 </div>
             </div>
           </div>
-<<<<<<< HEAD
           <!-- Recent Sales -->
           <div class="col-12">
               <div class="card recent-sales overflow-auto">
@@ -158,19 +116,6 @@
 
             <!-- Top Selling -->
         </div><!-- End Left side columns -->
-=======
-          <div class="col-lg-7">
-            <div class="row">
-              <div class="col-12">
-                    <div class="card ">
-                      <div class="filter">
-                      </div>
-                    </div>
-                  </div>
-              </div>
-            </div>
-          </div>
->>>>>>> master
 
           <!-- Right side columns -->
           <div class="col-lg-5">
@@ -179,13 +124,8 @@
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title">Most Recent Order Status</h5>
-<<<<<<< HEAD
                 <div class="activity">
 
-=======
-                <div>Medicine Details</div>
-                <div class="activity">
->>>>>>> master
                   <div class="activity-item d-flex">
                     <div class="activite-label">1</div>
                     <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
@@ -194,54 +134,32 @@
 
                   <div class="activity-item d-flex">
                     <div class="activite-label">2</div>
-<<<<<<< HEAD
                     <i class='bi bi-circle-fill activity-badge text-danger align-self-start'></i>
                     <div class="activity-content">Identity Verification {{$recentOrderCreatedAt}}</div>
-=======
-                    <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
-                    <div class="activity-content">Treatment Request {{$recentOrderCreatedAt}}</div>
->>>>>>> master
                   </div><!-- End activity item-->
 
                   <div class="activity-item d-flex">
                     <div class="activite-label">3</div>
-<<<<<<< HEAD
                     <i class='bi bi-circle-fill activity-badge text-primary align-self-start'></i>
                     <div class="activity-content">Treatment Request {{$recentOrderCreatedAt}}</div>
-=======
-                    <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
-                    <div class="activity-content">Processing {{$caseStatus}}</div>
->>>>>>> master
                   </div><!-- End activity item-->
 
                   <div class="activity-item d-flex">
                     <div class="activite-label">4</div>
                     <i class='bi bi-circle-fill activity-badge text-info align-self-start'></i>
-<<<<<<< HEAD
                     <div class="activity-content">Prescription</div>
-=======
-                    <div class="activity-content">Prescription {{$prescriptionStatus}}</div>
->>>>>>> master
                   </div><!-- End activity item-->
 
                   <div class="activity-item d-flex">
                     <div class="activite-label">5</div>
                     <i class='bi bi-circle-fill activity-badge text-warning align-self-start'></i>
-<<<<<<< HEAD
                     <div class="activity-content">Order Processing</div>
-=======
-                    <div class="activity-content">Order Placed {{$orderStatus}}</div>
->>>>>>> master
                   </div><!-- End activity item-->
 
                   <div class="activity-item d-flex">
                     <div class="activite-label">6</div>
                     <i class='bi bi-circle-fill activity-badge text-muted align-self-start'></i>
-<<<<<<< HEAD
                     <div class="activity-content">Order Shipped</div>
-=======
-                    <div class="activity-content">Order Processing </div>
->>>>>>> master
                   </div><!-- End activity item-->
                   
                   
