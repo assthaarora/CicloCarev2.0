@@ -4,6 +4,11 @@ namespace App\Http\Controllers\Patient;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+<<<<<<< HEAD
+=======
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+>>>>>>> master
 
 class EmailIntakeController extends Controller
 {
@@ -14,6 +19,10 @@ class EmailIntakeController extends Controller
      */
     public function index()
     {
+<<<<<<< HEAD
+=======
+        
+>>>>>>> master
         return view('patient/email');
     }
 
@@ -22,9 +31,16 @@ class EmailIntakeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+<<<<<<< HEAD
     public function create()
     {
         //
+=======
+    public function create($mId)
+    {
+        $mId=decrypt($mId);
+        return view('patient/email',compact('mId'));
+>>>>>>> master
     }
 
     /**
@@ -40,7 +56,12 @@ class EmailIntakeController extends Controller
             'email'=>'required|email'
         ]);
        $email=$request->email;
+<<<<<<< HEAD
         return redirect()->route('form',['email' =>encrypt($email)]);
+=======
+       $mId=$request->mId;
+        return redirect()->route('form',['email' =>encrypt($email),'mId' => encrypt($mId)]);
+>>>>>>> master
     }
 
     /**

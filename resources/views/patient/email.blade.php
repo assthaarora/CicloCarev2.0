@@ -6,10 +6,18 @@
 
                 <div class="d-flex justify-content-center py-4">
                 <a href="index.html" class="logo d-flex align-items-center w-auto">
+<<<<<<< HEAD
                     <img src="assets/img/logo.png" alt="">
                     <span class="d-none d-lg-block">CicloCare</span>
                 </a>
                 </div><!-- End Logo -->
+=======
+                    <img src={{ asset('assets/img/logo.png') }} alt="">
+                    <span class="d-none d-lg-block">CicloCare</span>
+                </a>
+                </div>
+                <!--End Logo -->
+>>>>>>> master
 
                 <div class="card mb-3">
 
@@ -27,6 +35,11 @@
                         <form class="row g-3 needs-validation" id="contactform" novalidate="" method="POST" action="{{ route('intake.store') }}">
                         @csrf
                         <div class="col-12">
+<<<<<<< HEAD
+=======
+                        <input id="mId" type=hidden class="form-control " name="mId" value="{{ $mId }}" >
+            
+>>>>>>> master
                             <label for="yourUsername" class="form-label">{{ __('Email Address') }}</label>
                             <div class="input-group has-validation">
                               <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
@@ -50,7 +63,11 @@
                                 <button class="btn btn-primary w-100" type="submit">Next</button>
                             </div>
                             <div class="col-12">
+<<<<<<< HEAD
                                 <p class="small mb-0">Already have an account? <a href="pages-login.html">Log in</a></p>
+=======
+                                <p class="small mb-0">Already have an account? <a href="{{route('login')}}">Log in</a></p>
+>>>>>>> master
                             </div>
                         </form>
                     </div>
@@ -64,13 +81,23 @@
    $(document).ready(function() {
     $("form").validate({
         rules: {
+<<<<<<< HEAD
             name: "required",
             first_name: "required",
             last_name: "required",
             email: "required",
             mobile: "required",
+=======
+            email: "required",
+>>>>>>> master
             ...
         }
     });
 });
+<<<<<<< HEAD
 </script>
+=======
+</script>
+
+<!--  -->
+>>>>>>> master

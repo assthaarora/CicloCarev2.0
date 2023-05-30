@@ -66,7 +66,11 @@
                 <button class="btn btn-primary w-100" type="submit">{{ __('Login') }}</button>
               </div>
               <div class="col-12">
+<<<<<<< HEAD
                 <p class="small mb-0">Don't have account? <a href="pages-register.html">Create an account</a></p>
+=======
+                <p class="small mb-0">Don't have account? <a href="{{route('/')}}">Create an account</a></p>
+>>>>>>> master
               </div>
             </form>
 
