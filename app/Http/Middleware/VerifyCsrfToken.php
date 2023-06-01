@@ -12,6 +12,6 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        'webhook'
+        '/webhooks/md-integrations','/webhooks/precision-compounding-pharmacy'
     ];
 }

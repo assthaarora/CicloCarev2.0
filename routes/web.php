@@ -88,5 +88,9 @@ Route::post('/patient_profile/updatePassword/{id}', [App\Http\Controllers\Patien
 Route::get('/pincode/{pincode}', [App\Http\Controllers\Ajax\AjaxController::class, 'pincode']);
 Route::post('/createmedication', [App\Http\Controllers\PatientController::class, 'createmedication'])->name('admin.createmedication');
 Route::get('/users_form', [App\Http\Controllers\PatientController::class, 'users_form'])->name('users_form');
-Route::webhooks('webhook');
-Route::webhooks('webhookOrder');
+// Route::webhooks('webhook');
+// Route::webhooks('webhookOrder');
+
+Route::webhooks('/webhooks/md-integrations', 'webhookMDI');
+Route::webhooks('/webhooks/precision-compounding-pharmacy', 'webhookOrder');
+
