@@ -17,25 +17,6 @@
 </head>
 
 <body>
-<<<<<<< HEAD
-    {{-- @if (count($errors) > 0)
-
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-     </ul>
-    </div>
-     @endif
-    @if ($message = Session::get('success'))
-    <div class="alert alert-success alert-block">
-     <button type="button" class="close" data-dismiss="alert">×</button>
-     <strong>{{ $message }}</strong>
-     </div>
-     @endif --}}
-=======
->>>>>>> master
     <div class="main">
 
         <div class="container">
@@ -83,15 +64,9 @@
                                         <label class="form-label">Gender</label>
                                         <select class="form-select" name="user_data[gender]" >
                                             <option value="">Not known</option>
-<<<<<<< HEAD
-                                            <option value="1">Male</option>
-                                            <option value="2">Female</option>
-                                            <option value="9">Not Applicable</option>
-=======
                                             <option value="1"{{ old('user_data[gender]') == 1 ? 'selected' : '' }}>Male</option>
                                             <option value="2"{{ old('user_data[gender]') == 2 ? 'selected' : '' }}>Female</option>
                                             <option value="9"{{ old('user_data[gender]') == 9 ? 'selected' : '' }}>Not Applicable</option>
->>>>>>> master
                                         </select>
                                         @if ($errors->has('user_data.gender'))
                                         <span style="color:red;">{{ $errors->first('user_data.gender') }}</span>
@@ -113,13 +88,8 @@
                                         <label for="phonetype" class="form-label">Phone Type</label>
                                         <select class="form-select" name="user_data[phone_type]">
                                             <option value="">Please Select</option>
-<<<<<<< HEAD
-                                            <option value="2">2</option>
-                                            <option value="4">4</option>
-=======
                                             <option value="2"{{ old('user_data[phone_type]') == 2 ? 'selected' : '' }}>2</option>
                                             <option value="4"{{ old('user_data[phone_type]') == 4 ? 'selected' : '' }}>4</option>
->>>>>>> master
                                         </select>
                                         @if ($errors->has('user_data.phone_type'))
                                         <span style="color:red;">{{ $errors->first('user_data.phone_type') }}</span>
@@ -424,11 +394,7 @@
                                         @foreach ($val->options as $key => $option)
                                             <div class="form-check p-2" style="display:flex;">
                                                 <input class="form-check-input" type="radio"
-<<<<<<< HEAD
-                                                    name="intake_data[{{ $k }}][answer]" value=""
-=======
                                                     name="intake_data[{{ $k }}][answer]" value="{{ old("intake_data.$k.answer") }}"
->>>>>>> master
                                                     style="width:3% !important">
                                                 <label class="form-check-label" for="exampleRadios1"
                                                     style="padding: 18px">
@@ -729,11 +695,7 @@
 <script src="{{ asset('vendor/nouislider/nouislider.min.js') }}"></script>
 <script src="{{ asset('vendor/wnumb/wNumb.js') }}"></script>
 <script src="{{ asset('js/main.js') }}"></script>
-<<<<<<< HEAD
-=======
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
->>>>>>> master
 
 
 </html>
