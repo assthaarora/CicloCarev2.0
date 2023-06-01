@@ -8,12 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class OrderDetail extends Model
 {
     use HasFactory;
-<<<<<<< HEAD
-    protected $table = 'order_details';
-=======
+
 
     protected $table = 'patient_order_details';
->>>>>>> master
 
     protected $fillable = [
         'patient_id',
@@ -29,8 +26,6 @@ class OrderDetail extends Model
         'created_at',
         'updated_at',
     ];
-<<<<<<< HEAD
-=======
 
     protected $casts = [
         'created_at' => 'datetime',
@@ -56,5 +51,4 @@ class OrderDetail extends Model
     {
         return $this->hasOne('App\Models\PrescriptionDetail', 'id', 'prescription_id');
     }
->>>>>>> master
 }
