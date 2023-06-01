@@ -9,11 +9,7 @@ use Auth;
 use DB;
 use App\Models\User;
 use App\Models\UserDetails;
-<<<<<<< HEAD
-=======
 use function helper;
->>>>>>> master
-
 class PatientProfileController extends Controller
 {
 
@@ -33,37 +29,20 @@ class PatientProfileController extends Controller
         'usersdetails.current_medications',
         'usersdetails.driver_license_id',
         'usersdetails.userId','usersdetails.metadata')->first();
-<<<<<<< HEAD
-
-=======
-        // dd($patient_data);
->>>>>>> master
         return view('home.patient_profile',compact('patient_data'));
     }
 
 
-    public function create()
-    {
-
-    }
+    public function create(){}
 
 
-    public function store(Request $request)
-    {
-        //
-    }
+    public function store(Request $request){}
 
 
-    public function show($id)
-    {
-        //
-    }
+    public function show($id){}
 
 
-    public function edit($id)
-    {
-        //
-    }
+    public function edit($id){}
 
 
     public function update(Request $request, $id)
@@ -71,11 +50,7 @@ class PatientProfileController extends Controller
         // dd($request,$id);
         DB::transaction(function () use ($id, $request) {
             $user = User::find($id);
-<<<<<<< HEAD
-            $user->first_name=$request->first_name;
-=======
             $user->name=$request->first_name;
->>>>>>> master
             $user->last_name=$request->last_name;
             $user->email=$request->email;
             $user->date_of_birth=$request->dateOfBirth;
@@ -163,10 +138,7 @@ class PatientProfileController extends Controller
     }
 
 
-    public function destroy($id)
-    {
-        //
-    }
+    public function destroy($id){}
 
     public function updatePassword(Request $request, $id)
     {
