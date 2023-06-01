@@ -48,20 +48,22 @@ use Illuminate\Support\Facades\Route;
 // Route::webhooks('webhookOrder');
 
 
-Route::get('/', function () {
-<<<<<<< HEAD
-    return view('patient/email');
-});
+// Route::get('/', function () {
 
-Auth::routes();
-Route::get('/login', function () {return view('auth.login');})->name('login');
-Route::post('/intake', [App\Http\Controllers\Patient\EmailIntakeController::class, 'store'])->name('intake.store');
-Route::get('/form/{email}', [App\Http\Controllers\Patient\IntakePageController::class, 'index'])->name('form');
-Route::post('/form', [App\Http\Controllers\Patient\IntakePageController::class, 'store'])->name('form.store');
-Route::get('/users_profile', [App\Http\Controllers\PatientController::class, 'users_profile'])->name('users_profile');
-Route::get('/home', [App\Http\Controllers\Patient\DashboradController::class, 'index'])->name('home');
-Route::get('/patient_dashboard', [App\Http\Controllers\Patient\DashboradController::class, 'index'])->name('patient_dashboard');
-=======
+//     return view('patient/email');
+// });
+
+// Auth::routes();
+// Route::get('/login', function () {return view('auth.login');})->name('login');
+// Route::post('/intake', [App\Http\Controllers\Patient\EmailIntakeController::class, 'store'])->name('intake.store');
+// Route::get('/form/{email}', [App\Http\Controllers\Patient\IntakePageController::class, 'index'])->name('form');
+// Route::post('/form', [App\Http\Controllers\Patient\IntakePageController::class, 'store'])->name('form.store');
+// Route::get('/users_profile', [App\Http\Controllers\PatientController::class, 'users_profile'])->name('users_profile');
+// Route::get('/home', [App\Http\Controllers\Patient\DashboradController::class, 'index'])->name('home');
+// Route::get('/patient_dashboard', [App\Http\Controllers\Patient\DashboradController::class, 'index'])->name('patient_dashboard');
+// =======
+Route::get('/', function () {
+
     return view('welcome');
 })->name('/');
 
@@ -79,7 +81,7 @@ Route::get('/patient_dashboard', [App\Http\Controllers\Patient\DashboradControll
 
 Route::get('/users_profile', [App\Http\Controllers\PatientController::class, 'users_profile'])->name('users_profile');
 Route::get('/home', [App\Http\Controllers\Patient\DashboradController::class, 'index'])->name('home');
->>>>>>> master
+
 Route::get('/order_management', [App\Http\Controllers\HomeController::class, 'order_management'])->name('order_management');
 Route::resource('patient_profile', App\Http\Controllers\Patient\PatientProfileController::class);
 Route::post('/patient_profile/updatePassword/{id}', [App\Http\Controllers\Patient\PatientProfileController::class, 'updatePassword'])->name('patient_profile.updatePassword');
