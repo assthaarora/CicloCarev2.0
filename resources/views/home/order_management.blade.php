@@ -41,11 +41,6 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Order Management</h4>
-<<<<<<< HEAD
-                   
-=======
-
->>>>>>> master
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
@@ -54,25 +49,6 @@
                                        S.No.
                                     </th>
                                     <th>
-<<<<<<< HEAD
-                                      Order
-                                    </th>
-                                    <th>
-                                        Order Medicine
-                                    </th>
-                                    <th>
-                                        Select Medicine and quantity
-                                    </th>
-                                    <th>
-                                       select billing cycle
-                                    </th>
-                                    <th>
-                                        Details
-                                     </th>
-                                     <th>
-                                        Track Order
-                                     </th>
-=======
                                         Medicine Name
                                     </th>
                                     <th>
@@ -81,45 +57,12 @@
                                     <th>
                                        Pending Suply Days
                                     </th>
->>>>>>> master
                                      <th>
                                         Status
                                      </th>
                                 </tr>
                             </thead>
                             <tbody>
-<<<<<<< HEAD
-                                <tr>
-                                    <td >
-                                       1
-                                    </td>
-                                    <td>
-                                        NA
-                                    </td>
-                                    <td>
-                                        NA
-                                    </td>
-                                    <td>
-                                       1000
-                                    </td>
-                                    <td>
-                                        NA
-                                    </td>
-                                    <td>
-                                        NA
-                                    </td>
-                                    <td>
-                                        <div class="progress">
-                                            <div class="progress-bar bg-success" role="progressbar"
-                                                style="width: 25%" aria-valuenow="25" aria-valuemin="0"
-                                                aria-valuemax="100"></div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        NA
-                                    </td>
-                                </tr>
-=======
                                 @foreach ($orders as $key => $order)
                                     <tr>
                                         <td>
@@ -139,7 +82,6 @@
                                         </td>
                                     </tr>
                                 @endforeach
->>>>>>> master
                             </tbody>
                         </table>
                     </div>
