@@ -28,7 +28,7 @@ class EmailIntakeController extends Controller
         ]);
        $email=$request->email;
        $mId=$request->mId;
-        return redirect()->route('form',['email' =>encrypt($email),'mId' => encrypt($mId)]);
+        return redirect()->route('personalInfo',['email' =>encrypt($email),'mId' => encrypt($mId)]);
     }
 
     public function show($id){}

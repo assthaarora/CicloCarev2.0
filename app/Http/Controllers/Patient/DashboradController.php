@@ -142,7 +142,7 @@ class DashboradController extends Controller
                 ->on('ps.caseId', '=', 'pc.id')
                 ->on('ps.mId', '=', 'gam.id');
        })
-       ->select('med_name', 'ps.subscription', 'price', 'pcs.name')
+       ->select('u.id as userId','pc.case_id','pc.id as dbcaseId','med_name', 'ps.subscription', 'price', 'pcs.name')
        ->where('u.id', $userId)
        ->get();
        
