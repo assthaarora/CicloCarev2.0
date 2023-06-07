@@ -71,11 +71,14 @@ Auth::routes();
 Route::get('/login', function () {return view('auth.login');})->name('login');
 Route::get('/intake/{mId}', [App\Http\Controllers\Patient\EmailIntakeController::class, 'create'])->name('intake');
 Route::post('/intake', [App\Http\Controllers\Patient\EmailIntakeController::class, 'store'])->name('intake.store');
+Route::get('/personalInfo/{email}/{mId}', [App\Http\Controllers\Patient\PatientPersonalInfo::class, 'index'])->name('personalInfo');
+Route::post('/personalInfo', [App\Http\Controllers\Patient\PatientPersonalInfo::class, 'store'])->name('personalInfo.store');
 Route::get('/form/{email}/{mId}', [App\Http\Controllers\Patient\IntakePageController::class, 'index'])->name('form');
 Route::post('/form', [App\Http\Controllers\Patient\IntakePageController::class, 'store'])->name('form.store');
 
 
 Route::get('/patient_dashboard', [App\Http\Controllers\Patient\DashboradController::class, 'index'])->name('patient_dashboard');
+Route::get('/patient_prescription/{pId}/{cId}', [App\Http\Controllers\Patient\PatientPrescription::class, 'create'])->name('patient_prescription');
 
 
 

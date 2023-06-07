@@ -65,6 +65,7 @@ function actionOnScroll(selector, callback, topScroll = false) {
 }
 function routerPush(title, url) {
   $("meta[name=url]").attr("content", url);
+  console.log("I am being used");
   return window.history.pushState({}, title || document.title, url);
 }
 function updateSelectedContact(user_id) {
@@ -674,7 +675,7 @@ clientListenChannel.bind("client-contactItem", function (data) {
   if (data.to == auth_id) {
     if (data.update) {
       updateContactItem(data.from);
-    } else {
+    }                                                else {
       console.error("Can not update contact item!");
     }
   }

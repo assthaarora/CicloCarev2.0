@@ -85,7 +85,7 @@ class PatientProfileController extends Controller
                 "first_name"=> $request->first_name,
                 "last_name"=> $request->last_name,
                 "gender"=> $request->gender,
-                "date_of_birth"=> $request->dateOfBirth,
+                "date_of_birth"=> "2023-20-05",
                 "active"=> false,
                 "weight"=> $request->weight,
                 "height"=> $request->height,
@@ -108,7 +108,7 @@ class PatientProfileController extends Controller
 
             $json = json_encode($json);
 
-            // dd($json);
+           
 
             $curl = curl_init();
 
@@ -131,7 +131,7 @@ class PatientProfileController extends Controller
             $response_patient = curl_exec($curl);
 
             curl_close($curl);
-
+            dd($response_patient,getToken(),$json,$request->dateOfBirth);
             dd($response_patient);
         });
         return redirect()->back()->with('success', 'Record updated successfully.');

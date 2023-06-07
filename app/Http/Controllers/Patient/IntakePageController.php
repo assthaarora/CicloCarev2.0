@@ -21,6 +21,7 @@ class IntakePageController extends Controller
 
     public function index($email)
     {
+        
         $email=decrypt($email);
         $userexist=DB::table('users')->where('email',$email)->first();
         if($userexist){

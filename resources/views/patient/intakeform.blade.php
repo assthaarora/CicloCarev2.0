@@ -26,7 +26,7 @@
                 @csrf
               
                 <div>
-                    <h3>Personal info</h3>
+                    <!-- <h3>Personal info</h3>
                     <fieldset>
                         <div class="fieldset-content">
                             <div class="form-row">
@@ -159,8 +159,8 @@
                             </div>
                         </div>
 
-                    </fieldset>
-                    {{-- <h3> General Questions</h3>
+                    </fieldset> -->
+                    <!-- {{-- <h3> General Questions</h3>
                     <fieldset>
                         <div class="fieldset-content">
                             <div class="tab">
@@ -225,9 +225,10 @@
                             </div>
 
                         </div>
-                    </fieldset> --}}
+                    </fieldset> --}} -->
+                    
                     @foreach ($data as $k => $val)
-                        <h3> Medicine Questions</h3>
+                    <h3> Medicine Questions</h3>
                         <fieldset>
                             <div class="fieldset-content">
                                 <div style="padding-bottom: 10px">{{ $val->title }}
