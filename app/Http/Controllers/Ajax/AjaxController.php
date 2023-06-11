@@ -9,6 +9,7 @@ class AjaxController extends Controller
 {
     public function pincode($pincode)
     {
+        // dd($pincode,pincode($pincode));
         return pincode($pincode);
     }
 }

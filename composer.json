@@ -8,7 +8,7 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.3|^8.0",
+        "php": "^8.0",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
@@ -16,8 +16,9 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^3.4",
         "munafio/chatify": "^1.6",
+        "proengsoft/laravel-jsvalidation": "^4.7",
         "spatie/laravel-webhook-client": "^3.1",
-        "proengsoft/laravel-jsvalidation": ">2.2.0"
+        "uxweb/sweet-alert": "^2.0"
     },
     "require-dev": {
         "facade/ignition": "^2.3.6",

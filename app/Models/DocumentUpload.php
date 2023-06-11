@@ -9,10 +9,21 @@ class DocumentUpload extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'id',
+        'doc_id',
         'name',
         'file_path',
-        'doc_id',
+        'created_at',
+        'updated_at',
         'filename',
         'user_id',
+        'mime',
+        'file_size',
+        'uploaded_file',
+        'created_by',
+        'updated_by',
+        'mdi_fileId',
+        'mdi_url',
+        'mdi_urlThumbnail'
     ];
 }

@@ -73,7 +73,7 @@ Route::get('/intake/{mId}', [App\Http\Controllers\Patient\EmailIntakeController:
 Route::post('/intake', [App\Http\Controllers\Patient\EmailIntakeController::class, 'store'])->name('intake.store');
 Route::get('/personalInfo/{email}/{mId}', [App\Http\Controllers\Patient\PatientPersonalInfo::class, 'index'])->name('personalInfo');
 Route::post('/personalInfo', [App\Http\Controllers\Patient\PatientPersonalInfo::class, 'store'])->name('personalInfo.store');
-Route::get('/form/{email}/{mId}', [App\Http\Controllers\Patient\IntakePageController::class, 'index'])->name('form');
+Route::get('/form/{userId}/{mId}', [App\Http\Controllers\Patient\IntakePageController::class, 'index'])->name('form');
 Route::post('/form', [App\Http\Controllers\Patient\IntakePageController::class, 'store'])->name('form.store');
 
 

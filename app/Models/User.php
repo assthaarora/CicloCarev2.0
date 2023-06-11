@@ -17,10 +17,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'patient_id',
-        'partner_id',
         'prefix',
-        'first_name',
+        'name',
         'last_name',
         'email',
         'date_of_birth',

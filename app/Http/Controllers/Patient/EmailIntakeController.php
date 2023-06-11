@@ -6,13 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\EmailStoreRequest;
+
 
 class EmailIntakeController extends Controller
 {
-    public function index()
-    {
-        return view('patient/email');
-    }
+    public function index(){}
 
     public function create($mId)
     {
@@ -20,14 +19,10 @@ class EmailIntakeController extends Controller
         return view('patient/email',compact('mId'));
     }
 
-    public function store(Request $request)
+    public function store(EmailStoreRequest $request)
     {
-
-        $validatedData = $request->validate([
-            'email'=>'required|email'
-        ]);
-       $email=$request->email;
-       $mId=$request->mId;
+        $email=$request->email;
+        $mId=$request->mId;
         return redirect()->route('personalInfo',['email' =>encrypt($email),'mId' => encrypt($mId)]);
     }
 

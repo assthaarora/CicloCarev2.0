@@ -12,7 +12,7 @@ use App\Models\UserDetails;
 use function helper;
 class PatientProfileController extends Controller
 {
-
+ 
     public function index()
     {
         $patient_data=DB::table('users')->join('usersdetails', 'users.id', '=','usersdetails.userId')
