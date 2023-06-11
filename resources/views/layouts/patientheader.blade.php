@@ -31,17 +31,11 @@
 
   <!-- Template Main CSS File -->
   <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
-
-
-  <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('vendor/jquery-validation/dist/jquery.validate.min.js') }}"></script>
-    <script src="{{ asset('vendor/jquery-validation/dist/additional-methods.min.js') }}"></script>
-    <script src="{{ asset('vendor/jquery-steps/jquery.steps.min.js') }}"></script>
-    <script src="{{ asset('vendor/minimalist-picker/dobpicker.js') }}"></script>
-    <script src="{{ asset('vendor/nouislider/nouislider.min.js') }}"></script>
-    <script src="{{ asset('vendor/wnumb/wNumb.js') }}"></script>
-    <script src="{{ asset('js/main.js') }}""></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- <script src="{{ asset('js/main.js') }}""></script> -->
+    <style>
+      span{
+        color:red;
+      }
+    </style>
     
 </head>

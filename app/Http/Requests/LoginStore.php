@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class EmailStoreRequest extends FormRequest
+class LoginStore extends FormRequest
 {
     
     public function authorize()
@@ -12,10 +12,12 @@ class EmailStoreRequest extends FormRequest
         return true;
     }
 
+   
     public function rules()
     {
         return [
-            'email' => 'required|email|unique:users',
+            'email' => 'required',
+            'password' => 'required',
         
         ];
        
@@ -23,9 +25,10 @@ class EmailStoreRequest extends FormRequest
     public function messages()
     {
         return [
-            'email.required' => 'Email is required!',
-            
+            'email.required' => "Email is required",
+            'password.required' => "Password is required",
         ];
         
     }
 }
+

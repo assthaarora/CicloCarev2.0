@@ -6,12 +6,7 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
-        <div class="d-flex justify-content-center py-4">
-          <a href="index.html" class="logo d-flex align-items-center w-auto">
-            <img src="assets/img/logo.png" alt="">
-            <span class="d-none d-lg-block">CicloCare</span>
-          </a>
-        </div>
+        @include('layouts.patientlogo')
         <div class="card mb-3">
           <div class="card-body">
 
@@ -19,7 +14,7 @@
               <h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
               <p class="text-center small">Enter your username &amp; password to login</p>
             </div>
-            <form class="row g-3 needs-validation" novalidate="" method="POST" action="{{ route('login') }}">
+            <form class="row g-3"  method="POST" action="{{ route('login') }}" name="login" id="login">
             @csrf
               <div class="col-12">
                 <label for="yourUsername" class="form-label">{{ __('Email Address') }}</label>
@@ -64,5 +59,11 @@
     </div>
   </div>
 </section>
+<!-- Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.min.js')}}"></script>
+{!! JsValidator::formRequest('App\Http\Requests\LoginStore','#login') !!}
+
 
 
