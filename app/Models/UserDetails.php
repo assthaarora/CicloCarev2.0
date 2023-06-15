@@ -23,7 +23,7 @@ class UserDetails extends Model
         'pregnancy',
         'current_medications',
         'driver_license_id',
-        'userId','mdi_patientId','bmi'
+        'userId','mdi_patientId','bmi','cityId'
     ];
 
     /**
