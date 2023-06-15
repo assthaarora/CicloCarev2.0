@@ -6,10 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
 use DB;
-// <<<<<<< HEAD
-// =======
 use App\Models\OrderDetail;
-// >>>>>>> master
 
 class DashboradController extends Controller
 {
@@ -18,9 +15,10 @@ class DashboradController extends Controller
         //############################################### Get Patient Cases Details Ends ###############################################
        $recentOrderCreatedAt=DB::table('patient_case')
        ->select( 'created_at' )
-       ->where('userId',2)->orderBy('created_at','desc')
+       ->where('userId',Auth::user()->id)->orderBy('created_at','desc')
        ->first();
        $userId=Auth::user()->id;
+    //    dd(Auth::user(),$userId,$recentOrderCreatedAt);
        $recentOrderCreatedAt=date("F j, Y", strtotime($recentOrderCreatedAt->created_at));
 
        $patientCases = DB::table('users AS u')
@@ -29,8 +27,7 @@ class DashboradController extends Controller
        ->join('genral_admin_medicinedetails AS gam', 'gam.userId', '=', 'u.customer_of')
        ->join('patient_subscription AS ps', function ($join) {
            $join->on('ps.userId', '=', 'u.id')
-                ->on('ps.caseId', '=', 'pc.id')
-                ->on('ps.mId', '=', 'gam.id');
+                ->on('ps.caseId', '=', 'pc.id');
        })
        ->select('u.id as userId','pc.case_id','pc.id as dbcaseId','med_name', 'ps.subscription', 'price', 'pcs.name')
        ->where('u.id', $userId)
@@ -76,7 +73,7 @@ class DashboradController extends Controller
         
        
 
-       dd($userId,$recentOrderCreatedAt,$patientCases,$medicineName,$caseStatus,$prescriptionStatus,$orderStatus);
+    //    dd($userId,$recentOrderCreatedAt,$patientCases,$medicineName,$caseStatus,$prescriptionStatus,$orderStatus);
        
         return view('home.index',compact('patientCases','recentOrderCreatedAt','medicineName','caseStatus','prescriptionStatus','orderStatus'));
 
