@@ -18,7 +18,7 @@
         </li><!-- End Forms Nav -->
         <li class="nav-item">
             <a class="nav-link collapsed"  href="{{route('patient_profile.index')}}">
-                <i class="bi bi-circle"></i><span>Account Details</span>
+            <i class="bi bi-person"></i><span>Account Details</span>
             </a>
         </li><!-- End Tables Nav -->
     </ul>

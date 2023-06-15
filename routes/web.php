@@ -75,15 +75,17 @@ Route::get('/personalInfo/{email}/{mId}', [App\Http\Controllers\Patient\PatientP
 Route::post('/personalInfo', [App\Http\Controllers\Patient\PatientPersonalInfo::class, 'store'])->name('personalInfo.store');
 Route::get('/form/{userId}/{mId}', [App\Http\Controllers\Patient\IntakePageController::class, 'index'])->name('form');
 Route::post('/form', [App\Http\Controllers\Patient\IntakePageController::class, 'store'])->name('form.store');
+//After patient login
+Route::get('/home', [App\Http\Controllers\Patient\DashboradController::class, 'index'])->name('home');
 
 
 Route::get('/patient_dashboard', [App\Http\Controllers\Patient\DashboradController::class, 'index'])->name('patient_dashboard');
+
 Route::get('/patient_prescription/{pId}/{cId}', [App\Http\Controllers\Patient\PatientPrescription::class, 'create'])->name('patient_prescription');
 
 
 
 Route::get('/users_profile', [App\Http\Controllers\PatientController::class, 'users_profile'])->name('users_profile');
-Route::get('/home', [App\Http\Controllers\Patient\DashboradController::class, 'index'])->name('home');
 
 Route::get('/order_management', [App\Http\Controllers\HomeController::class, 'order_management'])->name('order_management');
 Route::resource('patient_profile', App\Http\Controllers\Patient\PatientProfileController::class);
