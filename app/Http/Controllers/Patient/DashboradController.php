@@ -13,13 +13,14 @@ class DashboradController extends Controller
     public function index()
     {
         //############################################### Get Patient Cases Details Ends ###############################################
-       $recentOrderCreatedAt=DB::table('patient_case')
+    //    dd(Auth::user()->id);
+        $recentOrderCreatedAt=DB::table('patient_case')
        ->select( 'created_at' )
        ->where('userId',Auth::user()->id)->orderBy('created_at','desc')
        ->first();
        $userId=Auth::user()->id;
-    //    dd(Auth::user(),$userId,$recentOrderCreatedAt);
-       $recentOrderCreatedAt=date("F j, Y", strtotime($recentOrderCreatedAt->created_at));
+       if ($recentOrderCreatedAt) 
+        $recentOrderCreatedAt=date("F j, Y", strtotime($recentOrderCreatedAt->created_at));
 
        $patientCases = DB::table('users AS u')
        ->join('patient_case AS pc', 'pc.userId', '=', 'u.id')

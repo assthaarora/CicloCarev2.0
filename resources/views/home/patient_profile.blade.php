@@ -1,49 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>Users / Profile - NiceAdmin Bootstrap Template</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
-
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
-  <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
-
-  <!-- =======================================================
-  * Template Name: NiceAdmin
-  * Updated: Mar 09 2023 with Bootstrap v5.2.3
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
-</head>
-
-<body>
 
   @include('home.header');
   <!-- ======= Sidebar ======= -->
   @include('home.slidebar');
-
+  <!-- <style>
+      span{
+        color:red;
+      }
+    </style> -->
   <main id="main" class="main">
 
     <div class="pagetitle">
@@ -66,11 +29,6 @@
             <div class="card-body pt-3">
               <!-- Bordered Tabs -->
               <ul class="nav nav-tabs nav-tabs-bordered">
-
-                <!-- <li class="nav-item">
-                  <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Overview</button>
-                </li> -->
-
                 <li class="nav-item">
                   <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit Profile</button>
                 </li>
@@ -81,63 +39,20 @@
               </ul>
               <div class="tab-content pt-2">
 
-              <!-- <div class="tab-pane fade   profile-overview" id="profile-overview">
-                  <h5 class="card-title">About</h5>
-                  <p class="small fst-italic">Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.</p>
-
-                  <h5 class="card-title">Profile Details</h5>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label ">Full Name</div>
-                    <div class="col-lg-9 col-md-8">Kevin Anderson</div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Company</div>
-                    <div class="col-lg-9 col-md-8">Lueilwitz, Wisoky and Leuschke</div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Job</div>
-                    <div class="col-lg-9 col-md-8">Web Designer</div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Country</div>
-                    <div class="col-lg-9 col-md-8">USA</div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Address</div>
-                    <div class="col-lg-9 col-md-8">A108 Adam Street, New York, NY 535022</div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Phone</div>
-                    <div class="col-lg-9 col-md-8">(436) 486-3538 x29071</div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Email</div>
-                    <div class="col-lg-9 col-md-8">k.anderson@example.com</div>
-                  </div>
-
-              </div>  -->
-
                 <div class="tab-pane fade show active profile-edit pt-3" id="profile-edit">
 
                   <!-- Profile Edit Form -->
-                  <form method="POST" action="{{ route('patient_profile.update', ['patient_profile' =>2]) }}">
+                  <form method="POST" action="{{ route('patient_profile.update', ['patient_profile' =>$patient_data->id]) }}" id="profile">
                     @csrf
                     @method('PUT')
                     <div class="row mb-3">
-                      <label for="fullName" class="col-md-4 col-lg-3 col-form-label">First Name</label>
+                      <label for="firstname" class="col-md-4 col-lg-3 col-form-label">First Name</label>
                       <div class="col-md-8 col-lg-9">
                         <input name="first_name" type="text" class="form-control" id="FirstName" value="{{$patient_data->name}}">
                       </div>
                     </div>
                     <div class="row mb-3">
-                      <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Last Name</label>
+                      <label for="lastname" class="col-md-4 col-lg-3 col-form-label">Last Name</label>
                       <div class="col-md-8 col-lg-9">
                         <input name="last_name" type="text" class="form-control" id="LastName" value="{{$patient_data->last_name}}">
                       </div>
@@ -145,18 +60,18 @@
                     <div class="row mb-3">
                       <label for="company" class="col-md-4 col-lg-3 col-form-label">Email</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="email" type="text" class="form-control" id="email" value="{{$patient_data->email}}">
+                        <input name="email" type="text" class="form-control" id="email" value="{{$patient_data->email}}" disabled>
                       </div>
                     </div>
                     <div class="row mb-3">
                       <label for="about" class="col-md-4 col-lg-3 col-form-label">Gender</label>
                       <div class="col-md-8 col-lg-9">
-                        <select class="form-control" name="gender"
-                        id="exampleFormControlSelect1">
-                        <option value="0">Not known</option>
-                        <option value="1">Male</option>
-                        <option value="2">Female</option>
-                        <option value="9">Not Applicable</option>
+                        <select class="form-control" name="gender" id="gender">
+                        <option value="">Please Select</option>
+                        <option value="0" @if($patient_data->gender == 0) selected @endif>Not known</option>
+                        <option value="1" @if($patient_data->gender == 1) selected @endif>Male</option>
+                        <option value="2" @if($patient_data->gender == 2) selected @endif>Female</option>
+                        <option value="9" @if($patient_data->gender == 9) selected @endif>Not Applicable</option>
                     </select>
 
                       </div>
@@ -165,91 +80,99 @@
                     <div class="row mb-3">
                       <label for="Job" class="col-md-4 col-lg-3 col-form-label">Birth Date</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="dateOfBirth" type="date" class="form-control" id="" value="{{date('Y-m-d', strtotime($patient_data->date_of_birth)) }}">
+                        <input name="dob" id="dob" type="date" class="form-control"  value="{{date('Y-m-d', strtotime($patient_data->date_of_birth)) }}">
                       </div>
                     </div>
-                    <!-- <div class="row mb-3">
-                      <label for="company" class="col-md-4 col-lg-3 col-form-label">Metadata</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="" type="text" class="form-control" id="" value="{{--$patient_data->metadata--}}">
-                      </div>
-                    </div> -->
                     <div class="row mb-3">
                       <label for="company" class="col-md-4 col-lg-3 col-form-label">Phone Number</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="phonenumber" type="text" class="form-control" id="" value="{{$patient_data->phone_number}}">
+                        <input name="phone" id="phone" type="text" class="form-control"  value="{{$patient_data->phone_number}}">
                       </div>
                     </div>
-                    <!-- <div class="row mb-3">
+                    <div class="row mb-3">
                       <label for="company" class="col-md-4 col-lg-3 col-form-label">Phone Type</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="" type="number" class="form-control" id="" value="{{--$patient_data->phone_type--}}">
-                      </div>
-                    </div> -->
+                        <select class="form-select" id="phntype" name="phntype">
+                              <option value="">Please Select</option>
+                              <option value="2" @if($patient_data->phone_type == 2) selected @endif>2</option>
+                              <option value="4" @if($patient_data->phone_type == 4) selected @endif>4</option>
+                          </select>
+                        </div>
+                    </div>
                     <div class="row mb-3">
-                      <label for="company" class="col-md-4 col-lg-3 col-form-label">Weight</label>
+                      <label for="company" class="col-md-4 col-lg-3 col-form-label">Weight (in lbs)</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="weight" type="number" class="form-control" id="" value="{{$patient_data->weight}}">
+                        <input name="weight" id="weight" type="number" class="form-control"  value="{{$patient_data->weight}}" onkeyup="calculateBMI()" onclick="calculateBMI()">
                       </div>
                     </div>
                     <div class="row mb-3">
-                      <label for="company" class="col-md-4 col-lg-3 col-form-label">Height</label>
+                      <label for="company" class="col-md-4 col-lg-3 col-form-label">Height (in cm)</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="height" type="number" class="form-control" id="" value="{{$patient_data->height}}">
+                        <input name="height" id="height" type="number" class="form-control"  value="{{$patient_data->height}}" onkeyup="calculateBMI()" onclick="calculateBMI()">
                       </div>
                     </div>
-
-
+                    <div class="row mb-3">
+                          <label for="inputState" class="col-md-4 col-lg-3 col-form-label" >BMI</label>
+                          <div class="col-md-8 col-lg-9">
+                            <input type="text" class="form-control" id="bmi" name ="bmi" id="bmi" value="{{$patient_data->bmi}}" readonly >
+                          </div>
+                    </div>
                     <div class="row mb-3">
                       <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Address 1</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="address1" type="text" class="form-control" id="" value="{{$patient_data->address1}}">
+                        <input name="address1" id="address1" type="text" class="form-control"  value="{{$patient_data->address1}}">
                       </div>
                     </div>
                     <div class="row mb-3">
                       <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Address 2</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="address2" type="text" class="form-control" id="" value="{{$patient_data->address2}}">
+                        <input name="address2" id="address2" type="text" class="form-control"  value="{{$patient_data->address2}}">
                       </div>
                     </div>
                     <div class="row mb-3">
-                      <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Zip Code</label>
+                      <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Zip</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="zip" type="text" class="form-control" id="zip" value="{{$patient_data->zip_code}}">
+                        <input name="zip" id="zip" type="text" class="form-control"  value="{{$patient_data->zip_code}}">
                       </div>
                     </div>
                     <div class="row mb-3">
-                      <label for="Phone" class="col-md-4 col-lg-3 col-form-label">City Name</label>
+                      <label for="Phone" class="col-md-4 col-lg-3 col-form-label">City</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="city" type="text" class="form-control" id="city" value="{{$patient_data->city_name}}">
+                      <input name="city_id" id="city_id" type="hidden" class="form-control"  value="{{$patient_data->cityId}}">
+                      
+                        <input name="city" id="city" type="text" class="form-control"  value="{{$patient_data->city_name}}">
                       </div>
                     </div>
                     <div class="row mb-3">
-                      <label for="Phone" class="col-md-4 col-lg-3 col-form-label">State Name</label>
+                      <label for="Phone" class="col-md-4 col-lg-3 col-form-label">State</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="state" type="text" class="form-control" id="state" value="{{$patient_data->state_name}}">
+                        <input name="state" id="state" type="text" class="form-control"  value="{{$patient_data->state_name}}">
                       </div>
                     </div>
-                    <!-- <div class="row mb-3">
+                    <div class="row mb-3">
                       <label for="pregnancy" class="col-md-4 col-lg-3 col-form-label">Allergies</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="" type="text" class="form-control" id="" value="{{$patient_data->allergies}}">
+                        <input name="allergeis" id="allergeis" type="text" class="form-control"  value="{{$patient_data->allergies}}">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="pregnancy" class="col-md-4 col-lg-3 col-form-label">Pregnancy</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="" type="checkbox"  @if($patient_data->pregnancy==1) Checked @else @endif>
-                      </div>
+                       <select class="form-select" id="pregnancy" name="pregnancy">
+                              <option value="">Please Select</option>
+                              <option value="y" @if($patient_data->pregnancy == "y") selected @endif>Yes</option>
+                              <option value="n" @if($patient_data->pregnancy == "n") selected @endif>No</option>
+                          </select>
+                        </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="" class="col-md-4 col-lg-3 col-form-label">Current Medications</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="" type="text" class="form-control" id="" value="{{$patient_data->current_medications}}">
+                        <input name="c_med" id="c_med" type="text" class="form-control"  value="{{$patient_data->current_medications}}">
                       </div>
-                    </div> -->
+                    </div>
 
 
                     <div class="text-center">
@@ -307,18 +230,23 @@
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
-  <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/chart.js/chart.umd.js"></script>
-  <script src="assets/vendor/echarts/echarts.min.js"></script>
-  <script src="assets/vendor/quill/quill.min.js"></script>
-  <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
-  <script src="assets/vendor/tinymce/tinymce.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="{{ asset('assets/vendor/apexcharts/apexcharts.min.js')}}"></script>
+  <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{ asset('assets/vendor/chart.js/chart.umd.js')}}"></script>
+  <script src="{{ asset('assets/vendor/echarts/echarts.min.js')}}"></script>
+  <script src="{{ asset('assets/vendor/quill/quill.min.js')}}"></script>
+  <script src="{{ asset('assets/vendor/simple-datatables/simple-datatables.js')}}"></script>
+  <script src="{{ asset('assets/vendor/tinymce/tinymce.min.js')}}"></script>
+  <script src="{{ asset('assets/vendor/php-email-form/validate.js')}}"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+  <!-- Scripts -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.min.js')}}"></script>
 
   <script>
     $(document).ready(function() {
@@ -334,15 +262,37 @@
                     type: "GET",
                     dataType: "json",
                     success: function(data) {
+                        $('#city_id').val(data['city_id']);
                         $('#city').val(data['city']);
                         $('#state').val(data['state']);
+                    },error: function(xhr, status, error) {
+                        var err = eval("(" + xhr.responseText + ")");
+                        alert("Please enter correct Postal Code");
+                        $('#zip').val('');
+                        $('#city').val('');
+                        $('#state').val('');
                     }
                 });
             }
         });
     });
   </script>
-
+<script>
+    function calculateBMI() {
+      var weight_in_lbs = parseFloat(document.getElementById('weight').value);
+      var height_in_cm = parseFloat(document.getElementById('height').value);
+      var bmi=0;
+      if (isNaN(weight_in_lbs) || isNaN(height_in_cm)) {
+        document.getElementById('bmi').value = bmi.toFixed(2);
+        return;
+      }
+      var height = height_in_cm / 100;
+      var weight = weight_in_lbs / 2.2046;
+      bmi = weight / (height * height);
+      document.getElementById('bmi').value = bmi.toFixed(2);
+    }
+  </script>
+{!! JsValidator::formRequest('App\Http\Requests\PatientDetailsUpdate','#profile') !!}
 </body>
 
 </html>
