@@ -15,7 +15,8 @@ use Illuminate\Support\Facades\DB;
 use function helper;
 use Carbon\Carbon;
 use Auth;
-
+use App\Models\PatientCaseDetails;
+use App\Models\PatientCaseStatusDetails;
 // use JsValidator;
 
 class IntakePageController extends Controller
@@ -54,71 +55,9 @@ class IntakePageController extends Controller
         }else{
             return;
         }
-
-        // dd(json_decode($response));
-
-         // $curl = curl_init();
-        // curl_setopt_array($curl, array(
-        //     CURLOPT_URL => 'https://api.mdintegrations.xyz/v1/partner/questionnaires/'.$genral_admin_medicinedetails->intakeformId,
-        //     CURLOPT_RETURNTRANSFER => true,
-        //     CURLOPT_ENCODING => '',
-        //     CURLOPT_MAXREDIRS => 10,
-        //     CURLOPT_TIMEOUT => 0,
-        //     CURLOPT_FOLLOWLOCATION => true,
-        //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        //     CURLOPT_CUSTOMREQUEST => 'GET',
-        //     CURLOPT_HTTPHEADER => array(
-        //         'Accept: application/json',
-        //         'Content-Type: application/json',
-        //         'Authorization: Bearer' . ' ' . $token
-        //     )
-        // ));
-
-
-        // $response = curl_exec($curl);
-        // $disease_name = json_decode($response)->name;
-        // $medication_ids = json_decode($response)->offerings->medications;
-        // $partner_quest_id = json_decode($response)->partner_questionnaire_id;
-
-        // $curl = curl_init();
-
-        // curl_setopt_array($curl, array(
-        //     CURLOPT_URL => 'https://api.mdintegrations.xyz/v1/partner/medications',
-        //     CURLOPT_RETURNTRANSFER => true,
-        //     CURLOPT_ENCODING => '',
-        //     CURLOPT_MAXREDIRS => 10,
-        //     CURLOPT_TIMEOUT => 0,
-        //     CURLOPT_FOLLOWLOCATION => true,
-        //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        //     CURLOPT_CUSTOMREQUEST => 'GET',
-        //     CURLOPT_HTTPHEADER => array(
-        //         'Authorization: Bearer' . ' ' . $token,
-        //         'Accept: application/json',
-        //         'Content-Type: application/json'
-        //     ),
-        // ));
-
-        // $response = curl_exec($curl);
-        // $all_medicine = [];
-        // foreach (json_decode($response) as $k => $val) {
-        //     if (in_array($val->partner_medication_id, array_column($medication_ids, 'partner_medication_id'))) {
-        //         $all_medicine[$k] = $val;
-        //     }
-        // }
-
-        // curl_close($curl);
-        // echo $response;
-        // }
-        // curl_close($curl);
-        // echo $response;
-
-        
     }
 
-    public function create()
-    {
-        //
-    }
+    public function create(){}
 
     public function store(Request $data)
     {
@@ -203,6 +142,7 @@ class IntakePageController extends Controller
                 ));
                 $case_response = curl_exec($case_curl);
                 curl_close($case_curl);
+                // dd(json_decode($case_response)->case_status->name);
                 // dd($case_response,$question_option);
                 $apiresponse = checkResponse($case_response);
                 if (!$apiresponse['success']) {
@@ -234,8 +174,10 @@ class IntakePageController extends Controller
                 if (!$apiresponse['success']) {
                     throw new \Exception('File Storage error');
                 }
+                //Save Ques answers to DB
                 // dd($responsefile,$apiresponse);
                 foreach ($data['intake_data'] as $key => $value) {
+                    // dd($data,$value);
                     IntakeFormAnswer::create([
                         'questionnaire_id' => $value['partner_questionnaire_question_id'],
                         'answer' => json_encode($value['answer']),
@@ -255,7 +197,7 @@ class IntakePageController extends Controller
                     ]);
                 }
                 
-
+                // save file to db 
                 $mdiFileResponse=json_decode($responsefile);
                 $fileModel = new DocumentUpload;
                 // dd($data->file,$data);
@@ -277,13 +219,48 @@ class IntakePageController extends Controller
                     $fileModel->mdi_urlthumbnail=$mdiFileResponse->url_thumbnail;
                     // dd($fileModel);
                     $fileModel->save();
-                    return back()
-                        ->with('success', 'File has been uploaded.')
-                        ->with('file', $uploadedFile->getClientOriginalName());
+                    // return back()
+                    //     ->with('success', 'File has been uploaded.')
+                    //     ->with('file', $uploadedFile->getClientOriginalName());
                 }
-                $flag=true;
-            });
+
+                //save case to DB
+                $caseApi=json_decode($case_response);
+                // dd($caseApi,$caseApi->case_status->reason);
+                if (!is_null($caseApi) && !is_null($caseApi->case_status)) {
+                    $caseStat=new PatientCaseStatusDetails;
+                    $caseStat->name = $caseApi->case_status->name;
+                    if (!is_null($caseApi->case_status->reason)) {
+                        $caseStat->reason = $caseApi->case_status->reason;
+                    }else{
+                        $caseStat->reason ='*';
+                    }
+                    $caseStat->updated_at = $caseApi->case_status->updated_at;
+                    $caseStat->caseId = $caseApi->case_id;
+                    $caseStat->userId = $data->userId;
+                    $caseStat->save();
+                
+
+                    $case=new PatientCaseDetails;
+                    $case->prioritized_at =$caseApi->prioritized_at;
+                    $case->prioritized_reason =$caseApi->prioritized_reason;
+                    $case->metadata = $caseApi->metadata;
+                    $case->created_at =$caseApi->created_at;
+                    $case->is_sync =$caseApi->is_sync;
+                    $case->is_chargeable =$caseApi->is_chargeable;
+                    $case->case_type =$caseApi->case_type;
+                    $case->case_id =$caseApi->case_id;
+                    $case->reference_case_id =$caseApi->reference_case_id;
+                    $case->userId = $data->userId;
+                    $case->created_by = $data->userId;
+                    $case->updated_at = Carbon::now();
+                    $case->case_status_id =$caseStat->id;
+                    $case->save();
+                }
+
+                });
         }catch(\Exception $e){
+            dd($e);
             return redirect()->route('/');
         }
         return redirect()->route('login');

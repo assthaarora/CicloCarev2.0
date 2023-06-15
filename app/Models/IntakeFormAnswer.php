@@ -31,7 +31,7 @@ class IntakeFormAnswer extends Model
         'updated_at',
         'userId',
         'created_by',
-        'updated_by',
+        'updated_by','options'
         
         
     ];
