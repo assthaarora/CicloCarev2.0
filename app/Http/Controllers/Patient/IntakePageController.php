@@ -17,12 +17,13 @@ use Carbon\Carbon;
 use Auth;
 use App\Models\PatientCaseDetails;
 use App\Models\PatientCaseStatusDetails;
+use App\Models\PatientSubscription;
 // use JsValidator;
 
 class IntakePageController extends Controller
 {
 
-    public function index($userId,$mId)
+    public function index($userId,$mId,$qId)
     {
         $userId=decrypt($userId);
         $mId=decrypt($mId);
@@ -32,7 +33,7 @@ class IntakePageController extends Controller
         $token = getToken();
         $curl = curl_init();
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api.mdintegrations.xyz/v1/partner/questionnaires/' .$genral_admin_medicinedetails->intakeformId . '/questions',
+            CURLOPT_URL => 'https://api.mdintegrations.xyz/v1/partner/questionnaires/' ,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -48,10 +49,141 @@ class IntakePageController extends Controller
         ));
         $ques_response = curl_exec($curl);
         $apiresponse = checkResponse($ques_response);
-        $ques = json_decode($ques_response);
-        // dd($ques);
+        $que_res = json_decode($ques_response,true);
         if ($apiresponse['success']) {
-            return view('patient/intakeform ', compact('genral_admin_medicinedetails', 'ques', 'userId','mId'));
+            $partnerQuestionnaireId = "e63f1159-3900-4ee5-b831-b3ae79e8a42c";
+            foreach ($que_res as $element) {
+                if ($element['partner_questionnaire_id'] === $qId) {
+                    $curl = curl_init();
+                    curl_setopt_array($curl, array(
+                        CURLOPT_URL => 'https://api.mdintegrations.xyz/v1/partner/questionnaires/'.$qId . '/questions',
+                        CURLOPT_RETURNTRANSFER => true,
+                        CURLOPT_ENCODING => '',
+                        CURLOPT_MAXREDIRS => 10,
+                        CURLOPT_TIMEOUT => 0,
+                        CURLOPT_FOLLOWLOCATION => true,
+                        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                        CURLOPT_CUSTOMREQUEST => 'GET',
+                        CURLOPT_HTTPHEADER => array(
+                            'Accept: application/json',
+                            'Content-Type: application/json',
+                            'Authorization: Bearer' . ' ' . $token
+                        ),
+                    ));
+                    $ques = curl_exec($curl);
+                    $apiresponse = checkResponse($ques_response);
+                    if(!$apiresponse['success']){
+                        return;
+                    }
+                    $ques=json_decode($ques);
+                    //Reading Medication details 
+                    if (isset($element['offerings']) && is_array($element['offerings'])) {
+                        $offerings = $element['offerings'];
+
+                        if (isset($offerings['medications'])) {
+                            //Get all medications 
+                            $curl = curl_init();
+                            curl_setopt_array($curl, array(
+                                CURLOPT_URL => 'https://api.mdintegrations.xyz/v1/partner/medications',
+                                CURLOPT_RETURNTRANSFER => true,
+                                CURLOPT_ENCODING => '',
+                                CURLOPT_MAXREDIRS => 10,
+                                CURLOPT_TIMEOUT => 0,
+                                CURLOPT_FOLLOWLOCATION => true,
+                                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                                CURLOPT_CUSTOMREQUEST => 'GET',
+                                CURLOPT_HTTPHEADER => array(
+                                    'Accept: application/json',
+                                    'Content-Type: application/json',
+                                    'Authorization: Bearer' . ' ' . $token
+                                ),
+                            ));
+                            $medications = curl_exec($curl);
+                            $medresponse = checkResponse($medications);
+                            $medications = json_decode($medications, true);
+                            $medicationDetails = [];
+                            foreach ($offerings['medications'] as $medication) {
+                                foreach ($medications as $medication) {
+                                    if ($medication['partner_medication_id'] ===  $medication['partner_medication_id']) {
+                                        $medicationDetails[] = $medication;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+
+                        if (isset($offerings['compounds'])) {
+                            foreach ($offerings['compounds'] as $compound) {
+                                $compoundIDs[] = $compound['partner_compound_id'];
+
+                            }
+                        }
+                        $serviceDetails = [];
+                        if (isset($offerings['services'])) {
+                            foreach ($offerings['services'] as $service) {
+                                $serviceIDs[] = $service['partner_service_id'];
+                                $curl = curl_init();
+                                curl_setopt_array($curl, array(
+                                    CURLOPT_URL => 'https://api.mdintegrations.xyz/v1/partner/services/'.$service['partner_service_id'] ,
+                                    CURLOPT_RETURNTRANSFER => true,
+                                    CURLOPT_ENCODING => '',
+                                    CURLOPT_MAXREDIRS => 10,
+                                    CURLOPT_TIMEOUT => 0,
+                                    CURLOPT_FOLLOWLOCATION => true,
+                                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                                    CURLOPT_CUSTOMREQUEST => 'GET',
+                                    CURLOPT_HTTPHEADER => array(
+                                        'Accept: application/json',
+                                        'Content-Type: application/json',
+                                        'Authorization: Bearer' . ' ' . $token
+                                    ),
+                                ));
+                                $services = curl_exec($curl);
+                                $serresponse = checkResponse($ques_response);
+                                if(!$serresponse['success']){
+                                    return;
+                                }
+                                $serviceDetails[]=json_decode($services,true);
+
+                            }
+                        }
+                        $suppliesDetails=[];
+                        if (isset($offerings['supplies'])) {
+                            //Get all supplies 
+                            $curl = curl_init();
+                            curl_setopt_array($curl, array(
+                                CURLOPT_URL => 'https://api.mdintegrations.xyz/v1/partner/supplies',
+                                CURLOPT_RETURNTRANSFER => true,
+                                CURLOPT_ENCODING => '',
+                                CURLOPT_MAXREDIRS => 10,
+                                CURLOPT_TIMEOUT => 0,
+                                CURLOPT_FOLLOWLOCATION => true,
+                                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                                CURLOPT_CUSTOMREQUEST => 'GET',
+                                CURLOPT_HTTPHEADER => array(
+                                    'Accept: application/json',
+                                    'Content-Type: application/json',
+                                    'Authorization: Bearer' . ' ' . $token
+                                ),
+                            ));
+                            $supplies = curl_exec($curl);
+                            $supresponse = checkResponse($supplies);
+                            $supplies = json_decode($supplies, true);
+                            foreach ($offerings['supplies'] as $supply) {
+                                foreach ($supplies as $sup) {
+                                    if ($sup['partner_supply_id'] ===  $supply['partner_supply_id']) {
+                                        $suppliesDetails[] = $sup;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    break;
+                }
+            }
+            // dd($medicationDetails,$serviceDetails,$suppliesDetails);
+            return view('patient/intakeform ', compact('genral_admin_medicinedetails', 'ques', 'userId','mId','medicationDetails','serviceDetails','suppliesDetails'));
         }else{
             return;
         }
@@ -61,7 +193,7 @@ class IntakePageController extends Controller
 
     public function store(Request $data)
     {
-        
+        // dd($data);
         $patientId=DB::table('usersdetails')->where('userId',$data->userId)->pluck('mdi_patientId')->first();
         $token = getToken();
         $flag=false;
@@ -257,6 +389,15 @@ class IntakePageController extends Controller
                     $case->case_status_id =$caseStat->id;
                     $case->save();
                 }
+
+                $subs=PatientSubscription::create([
+                    'userId' => $data->userId,
+                    'mId' => $data->mId,
+                    'caseId' => $case->id,
+                    'subscription' => $data->options,
+                    'created_by' => $data->userId,
+                    'created_at' => Carbon::now(),
+                ]);
 
                 });
         }catch(\Exception $e){

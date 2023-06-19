@@ -14,12 +14,13 @@ use Illuminate\Support\Facades\DB;
 class PatientPersonalInfo extends Controller
 {
     
-    public function index($email,$mId)
+    public function index($email,$mId,$bId,$qId)
     {
         $email=decrypt($email);
         $mId=decrypt($mId);
-        $bid=DB::table('genral_admin_medicinedetails')->where('id',$mId)->pluck('userId')->first();
-        return view('patient/personalInfor',compact('email','mId','bid'));
+        $bid=decrypt($bId);
+        // $bid=DB::table('genral_admin_medicinedetails')->where('id',$mId)->pluck('userId')->first();
+        return view('patient/personalInfor',compact('email','mId','bid','qId'));
     }
 
     public function create(){}
@@ -27,7 +28,7 @@ class PatientPersonalInfo extends Controller
     public function store(Request $request)
     {
         $token =getToken();
-        // dd($request,$token);
+        //dd($request,$token);
         ################################################Patient Creation#####################################################################
         $gender = "";
         if ($request['gender'] == 0) {
@@ -142,7 +143,7 @@ class PatientPersonalInfo extends Controller
             }
             
         });
-        return redirect()->route('form',['userId' =>encrypt($userId),'mId' => encrypt($request->mId)]);
+        return redirect()->route('form',['userId' =>encrypt($userId),'mId' => encrypt($request->mId),'qId' => $request->qId]);
    
         }
 

@@ -100,7 +100,7 @@
                         <label class="form-label">MedicineId from medicinetable:1</label>
                     </div>
                     <div>
-                    <a href="{{ route('intake', ['mId' => encrypt(1)]) }}" class="btn btn-primary">Next</a>
+                    <a href="{{ route('intake', ['mId' => encrypt(1),'bId'=> encrypt(2),'qId'=>'e63f1159-3900-4ee5-b831-b3ae79e8a42c']) }}" class="btn btn-primary">Next</a>
                     </div>
                 </div>
             </div>

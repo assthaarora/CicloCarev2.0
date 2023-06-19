@@ -15,6 +15,7 @@
                             <input type="hidden" name="email" value="{{$email}}"/>
                             <input type="hidden" name="mId" value="{{$mId}}"/>
                             <input type="hidden" name="bid" value="{{$bid}}"/>
+                            <input type="hidden" name="qId" value="{{$qId}}"/>
                             @csrf
                             <div class="row g-3">
                                 <label for="inputName" class="form-label">Your Name</label>

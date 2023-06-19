@@ -13,17 +13,20 @@ class EmailIntakeController extends Controller
 {
     public function index(){}
 
-    public function create($mId)
+    public function create($mId,$bId,$qId)
     {
         $mId=decrypt($mId);
-        return view('patient/email',compact('mId'));
+        $bId= decrypt($bId);
+        return view('patient/email',compact('mId','bId','qId'));
     }
 
     public function store(EmailStoreRequest $request)
     {
         $email=$request->email;
         $mId=$request->mId;
-        return redirect()->route('personalInfo',['email' =>encrypt($email),'mId' => encrypt($mId)]);
+        $bId = $request->bId;
+        $qId = $request->qId;
+        return redirect()->route('personalInfo',['email' =>encrypt($email),'mId' => encrypt($mId),'bId' => encrypt($bId),'qId' => $qId]);
     }
 
     public function show($id){}

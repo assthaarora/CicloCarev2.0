@@ -39,14 +39,88 @@
                                         <img src="{{ asset('assets/img/1.png') }}" class="img-fluid rounded-start" alt="...">
                                         </div>
                                         <div class="col-md-8">
-                                        <div class="card-body">
-                                            <h5 class="card-title">{{$genral_admin_medicinedetails->med_name}}</h5>
-                                            <p class="card-text">{{$genral_admin_medicinedetails->med_Desc}}</p>
-                                            <p class="card-text">{{$genral_admin_medicinedetails->subscription}}</p>
-                                            <p class="card-text">{{$genral_admin_medicinedetails->subscription_frequency}}</p>
-                                            <p class="card-text">{{$genral_admin_medicinedetails->subscription_duration}}</p>
-                                            <p class="card-text">{{$genral_admin_medicinedetails->price}}</p>
+                                        <div>
+                                            @if (!empty($medicationDetails))
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Medication Details</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        
+                                                            @foreach ($medicationDetails as $med)
+                                                                <tr>
+                                                                    <td>{{$med['name']}}</td>
+                                                                    <td>Strength: {{$med['strength']}}</td>
+                                                                    <td>Refill Count: {{$med['refills']}}</td>
+                                                                </tr>
+                                                            @endforeach
+                                                        
+                                                    </tbody>
+                                                </table>
+                                            @endif
+                                            @if (!empty($serviceDetails))
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Services</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        
+                                                        @foreach ($serviceDetails as $service)
+                                                                <tr>
+                                                                    <td>Title: {{$service['title']}}</td>
+                                                                    <td>Description: {{$service['description']}}</td>
+                                                                </tr>
+                                                            @endforeach
+                                                        
+                                                    </tbody>
+                                                </table>
+                                            @endif
+                                            @if (!empty($suppliesDetails))
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Supplies</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        
+                                                        @foreach ($suppliesDetails as $supply)
+                                                                <tr>
+                                                                    <td>Title: {{$supply['title']}}</td>
+                                                                    <td>Name: {{$supply['name']}}</td>
+                                                                    <td>Refill Count{{$supply['refills']}}</td>
+                                                                </tr>
+                                                            @endforeach
+                                                        
+                                                    </tbody>
+                                                </table>
+                                            @endif
+                                            @if(!empty($compounds))
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Compounds</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        
+                                                        @foreach ($compounds as $compound)
+                                                                <tr>
+                                                                    <td>{{$compound['partner_compound_id']}}</td>
+                                                                    <td>{{$compound['pharmacy_id']}}</td>
+                                                                    <!-- Add more columns as needed -->
+                                                                </tr>
+                                                            @endforeach
+                                                        
+                                                    </tbody>
+                                                </table>
+                                            @endif
                                         </div>
+
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -175,17 +249,34 @@
                                 </div>
                                 <!-- TAB 3 -->
                                 <div class="tab">
-                                    <!-- <label for="radioOptions">Select Subscription</label>
-                                    <div id="radioOptions">
-                                        <input type="radio" id="option1" name="options" value="option1">
-                                        <label for="option1">Option 1</label>
+                                    <label for="radioOptions"><h3>Select Subscription for</h3> </label>
+                                    @if (!empty($medicationDetails))
+                                        @foreach ($medicationDetails as $med)
+                                                <div><h5>{{$med['name']}}</h5></div>
+                                                <div><b>Strength:</b> {{$med['strength']}}</div>
+                                                <div><b>Refill Count:</b> {{$med['refills']}}</div>
+                                        <div id="radioOptions" style="display: flex;flex-direction: row;">
+                                            <input type="radio" id="option1" name="options" class="options" value="1" style="margin-right: 2px;transform: scale(0.5);">
+                                            <label for="option1"  style="white-space: nowrap;">One Time</label>
 
-                                        <input type="radio" id="option2" name="options" value="option2">
-                                        <label for="option2">Option 2</label>
-                                    </div>
-                                    <div id="radioErrorMessage" style="display: none; color: red;">Please select an option.</div> -->
+                                            <input type="radio" id="option2" name="options" class="options" value="2" style="margin-right: 2px;transform: scale(0.5);"> 
+                                            <label for="option2" style="white-space: nowrap;" >Every Month</label>
+
+                                            <input type="radio" id="option3" name="options" class="options" value="3" style="margin-right: 2px;transform: scale(0.5);">
+                                            <label for="option2"  style="white-space: nowrap;">Quarterly</label>
+
+                                            <input type="radio" id="option4" name="options" class="options" value="4" style="margin-right: 2px;transform: scale(0.5);">
+                                            <label for="option2"  style="white-space: nowrap;">Half yearly</label>
+
+                                            <input type="radio" id="option5" name="options" class="options" value="5" style="margin-right: 2px;transform: scale(0.5);">
+                                            <label for="option2" style="white-space: nowrap;">Yearly</label>
+                                        </div>
+                                        @endforeach
+                                    @endif
+                                    <div id="radioErrorMessage" style="display: none; color: red;">Please select an option.</div>
+                                    <br>
                                     <div>
-                                        <label for="govtId">Upload Government ID</label>
+                                        <label for="govtId"><h3>Upload Government ID</h3></label>
                                         <input type="file" id="govtId" name="govtId" class="form-control" accept=".pdf,.jpg,.jpeg,.png">
                                     </div> 
                                     <br>                               
