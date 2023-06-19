@@ -25,7 +25,7 @@ class OrderDetail extends Model
         'external_subscription_id',
         'created_at',
         'updated_at',
-        'caseId'
+        'caseId',
     ];
 
     protected $casts = [

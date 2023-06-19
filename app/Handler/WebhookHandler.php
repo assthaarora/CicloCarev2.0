@@ -24,8 +24,9 @@ class WebhookHandler extends ProcessWebhookJob{
             $eventtype=$payload['event_type'];
             $caseId=$payload['case_id'];
             $patientDetails=DB::table('patient_case')
-            ->where('case_id', '=', $caseId)
+            ->where('case_id', $caseId)
             ->select('userId')->first();
+	//	dd($patientDetails,$caseId);
             if (isset($patientDetails)) {
                 //Save payload to DB
                 if($eventtype !='prescription_submitted' || $eventtype!='patient_modified' || $eventtype!='new_case_message'){
@@ -102,6 +103,7 @@ class WebhookHandler extends ProcessWebhookJob{
                         }
                     });
                     dd("");
+
                     //#################################### Place order API
                     //Creating Patient
                     $dataPatientPost = [
