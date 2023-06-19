@@ -44,7 +44,7 @@ class WebhookHandler extends ProcessWebhookJob{
                 }
                 if($eventtype=='prescription_submitted'){
                     //saving prescription in DB 
-                    DB::transaction(function ()  use ($timestamp, $eventtype, $payload,$userDetails,$users)  {
+                    DB::transaction(function ()  use ($patientDetails,$timestamp, $eventtype, $payload,$userDetails,$users)  {
                         foreach ($payload['prescriptions'] as $value) {
                             $prescriptionData = new PrescriptionDetail;
                                 $prescriptionData->case_id = $payload['case_id'];
