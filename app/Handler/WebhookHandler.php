@@ -23,13 +23,12 @@ class WebhookHandler extends ProcessWebhookJob{
             $timestamp = Carbon::createFromTimestamp($timestamp)->toDateTimeString();
             $eventtype=$payload['event_type'];
             $caseId=$payload['case_id'];
-
             $patientDetails=DB::table('patient_case')
             ->where('case_id', '=', $caseId)
             ->select('userId')->first();
             if (isset($patientDetails)) {
                 //Save payload to DB
-                if($eventtype!='patient_modified' || $eventtype!='new_case_message'){
+                if($eventtype !='prescription_submitted' || $eventtype!='patient_modified' || $eventtype!='new_case_message'){
                     DB::transaction(function ()  use ($timestamp, $eventtype,$caseId,$patientDetails)  {
                         $data = [
                             'name' => $eventtype,
@@ -41,9 +40,7 @@ class WebhookHandler extends ProcessWebhookJob{
                         DB::table('patient_case_status')->insert($data);
                     });
                 }
-                dd($patientDetails->userId);
                 if($eventtype=='prescription_submitted'){
-
                     //saving prescription in DB 
                     DB::transaction(function ()  use ($timestamp, $eventtype, $payload)  {
                         foreach ($payload['prescriptions'] as $value) {
@@ -89,7 +86,6 @@ class WebhookHandler extends ProcessWebhookJob{
                                 $medicationData->metadata = $value['medication']['metadata'];
                                 $medicationData->partner_medication_id  = $value['medication']['partner_medication_id'];
                             $medicationData->save();
-
                             $orderData = new OrderDetail;
                                 $orderData->patient_id = 1;
                                 $orderData->external_patient_id = 'external_patient_id';
@@ -101,10 +97,11 @@ class WebhookHandler extends ProcessWebhookJob{
                                 $orderData->external_medication_id = 'external_medication_id';
                                 $orderData->subscription_id = 1;
                                 $orderData->external_subscription_id = 'external_subscription_id';
+                                $orderData->caseId = 'xyz';
                             $orderData->save();
                         }
                     });
-
+                    dd("");
                     //#################################### Place order API
                     //Creating Patient
                     $dataPatientPost = [
