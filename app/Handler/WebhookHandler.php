@@ -23,7 +23,6 @@ class WebhookHandler extends ProcessWebhookJob{
             $timestamp = Carbon::createFromTimestamp($timestamp)->toDateTimeString();
             $eventtype=$payload['event_type'];
             $caseId=$payload['case_id'];
-	//	dd($caseId);
             $patientDetails=DB::table('patient_case')
             ->where('case_id', $caseId)
             ->select('userId')->first();
@@ -42,9 +41,7 @@ class WebhookHandler extends ProcessWebhookJob{
                         DB::table('patient_case_status')->insert($data);
                     });
                 }
-                //dd($patientDetails->userId);
                 if($eventtype=='prescription_submitted'){
-
                     //saving prescription in DB 
                     DB::transaction(function ()  use ($timestamp, $eventtype, $payload)  {
                         foreach ($payload['prescriptions'] as $value) {
@@ -101,11 +98,12 @@ class WebhookHandler extends ProcessWebhookJob{
                                 $orderData->external_medication_id = 'external_medication_id';
                                 $orderData->subscription_id = 1;
                                 $orderData->external_subscription_id = 'external_subscription_id';
-				$orderData->caseId = 'xyz';
+                                $orderData->caseId = 'xyz';
                             $orderData->save();
                         }
                     });
-dd('');
+                    dd("");
+
                     //#################################### Place order API
                     //Creating Patient
                     $dataPatientPost = [
