@@ -13,6 +13,7 @@ use App\Models\OrderDetail;
 class WebhookHandler extends ProcessWebhookJob{
 
     public function handle(){
+        looger($this->webhookCall);
         //dd("default handler",$this->webhookCall->name);
         if($this->webhookCall->name == 'webhookOrder'){
 

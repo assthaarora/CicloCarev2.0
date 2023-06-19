@@ -57,7 +57,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
                         y[i].classList.remove("invalid");
                       }
                   } else if (y[i].type === "radio") {
-                      var radioGroup = document.getElementsByName(y[i].name);
+                      var radioGroup = document.getElementsByClassName("options");
+                      console.log(radioGroup);
                       var checked = false;
                       for (var j = 0; j < radioGroup.length; j++) {
                         if (radioGroup[j].checked) {

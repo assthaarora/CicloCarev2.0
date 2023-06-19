@@ -20,6 +20,8 @@
                         <form class="row g-3" id="contactform"  method="POST" action="{{ route('intake.store') }}">
                         @csrf
                         <input type="hidden" name="mId" value="{{$mId}}"/>
+                        <input type="hidden" name="bId" value="{{$bId}}"/>
+                        <input type="hidden" name="qId" value="{{$qId}}"/>
                         <div class="col-12">
                             <label for="yourUsername" class="form-label">{{ __('Email Address') }}</label>
                             <div class="input-group has-validation">

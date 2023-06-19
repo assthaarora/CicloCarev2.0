@@ -69,11 +69,11 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::get('/login', function () {return view('auth.login');})->name('login');
-Route::get('/intake/{mId}', [App\Http\Controllers\Patient\EmailIntakeController::class, 'create'])->name('intake');
+Route::get('/intake/{mId}/{bId}/{qId}', [App\Http\Controllers\Patient\EmailIntakeController::class, 'create'])->name('intake');
 Route::post('/intake', [App\Http\Controllers\Patient\EmailIntakeController::class, 'store'])->name('intake.store');
-Route::get('/personalInfo/{email}/{mId}', [App\Http\Controllers\Patient\PatientPersonalInfo::class, 'index'])->name('personalInfo');
+Route::get('/personalInfo/{email}/{mId}/{bId}/{qId}', [App\Http\Controllers\Patient\PatientPersonalInfo::class, 'index'])->name('personalInfo');
 Route::post('/personalInfo', [App\Http\Controllers\Patient\PatientPersonalInfo::class, 'store'])->name('personalInfo.store');
-Route::get('/form/{userId}/{mId}', [App\Http\Controllers\Patient\IntakePageController::class, 'index'])->name('form');
+Route::get('/form/{userId}/{mId}/{qId}', [App\Http\Controllers\Patient\IntakePageController::class, 'index'])->name('form');
 Route::post('/form', [App\Http\Controllers\Patient\IntakePageController::class, 'store'])->name('form.store');
 //After patient login
 Route::get('/home', [App\Http\Controllers\Patient\DashboradController::class, 'index'])->name('home');
