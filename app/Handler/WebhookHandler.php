@@ -24,9 +24,10 @@ class WebhookHandler extends ProcessWebhookJob{
             $eventtype=$payload['event_type'];
             $caseId=$payload['case_id'];
             $patientDetails=DB::table('patient_case')
-            ->where('case_id', $caseId)
-            ->select('userId')->first();
-	//	dd($patientDetails,$caseId);
+            ->where('case_id', '=', $caseId)
+            ->select('userId','case_id')->first();
+            $userDetails=DB::table('usersdetails')->where('userId',$patientDetails->userId)->first();
+            $users=DB::table('users')->where('id',$patientDetails->userId)->first();
             if (isset($patientDetails)) {
                 //Save payload to DB
                 if($eventtype !='prescription_submitted' || $eventtype!='patient_modified' || $eventtype!='new_case_message'){
@@ -43,7 +44,7 @@ class WebhookHandler extends ProcessWebhookJob{
                 }
                 if($eventtype=='prescription_submitted'){
                     //saving prescription in DB 
-                    DB::transaction(function ()  use ($timestamp, $eventtype, $payload)  {
+                    DB::transaction(function ()  use ($timestamp, $eventtype, $payload,$userDetails,$users)  {
                         foreach ($payload['prescriptions'] as $value) {
                             $prescriptionData = new PrescriptionDetail;
                                 $prescriptionData->case_id = $payload['case_id'];
@@ -88,29 +89,28 @@ class WebhookHandler extends ProcessWebhookJob{
                                 $medicationData->partner_medication_id  = $value['medication']['partner_medication_id'];
                             $medicationData->save();
                             $orderData = new OrderDetail;
-                                $orderData->patient_id = 1;
-                                $orderData->external_patient_id = 'external_patient_id';
-                                $orderData->businessman_id = 1;
-                                $orderData->external_businessman_id = 'external_businessman_id';
-                                $orderData->prescription_id = 1;
-                                $orderData->external_prescription_id = 'external_prescription_id';
-                                $orderData->medication_id = 1;
-                                $orderData->external_medication_id = 'external_medication_id';
+                                $orderData->patient_id = $patientDetails->userId;
+                                $orderData->external_patient_id = $userDetails->mdi_patientId;
+                                $orderData->businessman_id = $users->customer_of;
+                                $orderData->external_businessman_id = encrypt($users->customer_of);
+                                $orderData->prescription_id = $prescriptionData->id;
+                                $orderData->external_prescription_id = $value['dosespot_prescription_id'];
+                                $orderData->medication_id = $medicationData->id;
+                                $orderData->external_medication_id = $value['medication']['dosespot_medication_id'];
                                 $orderData->subscription_id = 1;
                                 $orderData->external_subscription_id = 'external_subscription_id';
-                                $orderData->caseId = 'xyz';
+                                $orderData->caseId = $patientDetails->case_id;
                             $orderData->save();
                         }
                     });
-                    dd("");
-
+                    dd($users,$userDetails);
                     //#################################### Place order API
                     //Creating Patient
                     $dataPatientPost = [
-                        'external_id' => 'ChangeThis123456',
-                        'first_name' => 'Aastha456',
-                        'last_name' => 'Arora456',
-                        'birth_date' => '1996-05-20'
+                        'external_id' => $userDetails->mdi_patientId,
+                        'first_name' => $users->name,
+                        'last_name' => $users->last_name,
+                        'birth_date' => $users->date_of_birth
                     ];
                     
                     $jsonPatient = json_encode($dataPatientPost);
@@ -138,7 +138,7 @@ class WebhookHandler extends ProcessWebhookJob{
                     $dataPrescriptionPost = [
                         'external_id' => "ChangeThisToo123566",
                         'patient_id' => "",
-                        'external_patient_id' => "ChangeThis123456",
+                        'external_patient_id' => $userDetails->mdi_patientId,
                         'shipping_address1' => "123 First",
                         'shipping_address2' => "",
                         'shipping_city' => "City",
