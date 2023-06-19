@@ -100,7 +100,7 @@ class WebhookHandler extends ProcessWebhookJob{
                                 $orderData->subscription_id = 1;
                                 $orderData->external_subscription_id = 'external_subscription_id';
                                 $orderData->caseId = $patientDetails->case_id;
-                            $orderData->save();
+                            $orderData->save(); 
                         }
                     });
                     dd($users,$userDetails);
@@ -133,17 +133,16 @@ class WebhookHandler extends ProcessWebhookJob{
                     ));
                     $responseCreatePatient = curl_exec($curl);
                     curl_close($curl);
-
                     //Create Prescription
                     $dataPrescriptionPost = [
                         'external_id' => "ChangeThisToo123566",
                         'patient_id' => "",
                         'external_patient_id' => $userDetails->mdi_patientId,
-                        'shipping_address1' => "123 First",
-                        'shipping_address2' => "",
-                        'shipping_city' => "City",
-                        'shipping_state' => "ST",
-                        'shipping_zip_code' => "12345",
+                        'shipping_address1' =>  $userDetails->address1,
+                        'shipping_address2' =>  $userDetails->address2,
+                        'shipping_city' =>  $userDetails->city_name,
+                        'shipping_state' =>  $userDetails->state_name,
+                        'shipping_zip_code' =>  $userDetails->zip_code,
                         'doctor_npi' => "555",
                         'doctor_first_name' => "TEST",
                         'doctor_last_name' => "TEST",

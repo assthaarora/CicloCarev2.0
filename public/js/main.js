@@ -1,4 +1,3 @@
-
 $(document).ready(function() {
     var data =$('.steps ul').find('li');
     $(this).remove('.step-number');

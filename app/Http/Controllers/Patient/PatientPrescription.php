@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Patient;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Auth;
+use DB;
 
 class PatientPrescription extends Controller
 {
@@ -24,7 +26,20 @@ class PatientPrescription extends Controller
      */
     public function create($pId,$cId)
     {
-        return view('home.patient_prescription');
+        // dd($pId,$cId,Auth::user());
+        $medicineDetails = DB::table('users AS u')
+            ->join('patient_case AS pc', 'pc.userId', '=', 'u.id')
+            ->join('genral_admin_medicinedetails AS gam', 'gam.userId', '=', 'u.customer_of')
+            ->where('u.id',Auth::user()->id)
+            ->orderBy('pc.created_at', 'desc')
+            ->select('med_name','med_Desc','price','case_id')
+            ->limit(1)
+            ->first();
+        $prescriptionDetails=DB::table('patient_prescription_details')
+        ->where('case_id',$medicineDetails->case_id)
+        ->orderBy('created_at', 'desc')
+        ->first();
+        return view('home.patient_prescription',compact('medicineDetails','prescriptionDetails'));
     }
 
     /**
