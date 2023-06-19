@@ -8,11 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class PrescriptionDetail extends Model
 {
     use HasFactory;
-<<<<<<< HEAD
-    protected $table = 'prescription_details';
-=======
     protected $table = 'patient_prescription_details';
->>>>>>> master
 
     protected $fillable = [
         'case_id',
@@ -35,17 +31,4 @@ class PrescriptionDetail extends Model
         'created_at',
         'updated_at',
     ];
-<<<<<<< HEAD
-=======
-
-    protected $casts = [
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime'
-    ];
-
-    protected $dates = [
-        'created_at',
-        'updated_at'
-    ];
->>>>>>> master
 }
